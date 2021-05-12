@@ -43,15 +43,15 @@ export default {
 
 		...mapMutations(["setLoginUserName","setLoginUserpwd"]),
 		handleSubmit({ userName, password }) {
-			// password = Base64.encode(password)
+			password = Base64.encode(password)
 			let data = {
 				username: userName,
 				password: password
 			};
-			// this.$axios.post(`${this.$config.KEY.url}/user/login`, data)
-			this.$axios.post('/login', data)
+			this.$axios.post(`${this.$config.KEY.url}/user/login`, data)
+			// this.$axios.post('/login', data)
 				.then(res => {
-					if (res.data.success == true) {
+					if (res.data.status == true) {
 						this.$Notice.success({
 							title: "登录成功！"
 						});
@@ -65,14 +65,14 @@ export default {
 					} else {
 						this.$Notice.error({
 							title: "登录失败！",
-							desc: "请输入正确的用户名和密码（用户名：admin，密码：admin） "
+							desc: "请输入正确的用户名和密码 "
 						});
 					}
 				})
 				.catch(err => {
 					this.$Notice.error({
 						title: "登录失败！",
-						desc: "请输入正确的用户名和密码（用户名：admin，密码：admin） "
+						desc: "请输入正确的用户名和密码"
 					});
 				});
 		}

@@ -259,77 +259,28 @@ export default {
 	methods: {
 		getShowList() {
 			this.$Loading.start();
-			// this.$axios.get(`${this.$config.KEY.url}/machine/user/1`)
-			this.$axios.get('/showList')
+			this.$axios.get(`${this.$config.KEY.url}/machine/user/1`)
+			// this.$axios.get('/showList')
 				.then(res => {
 					this.$Loading.finish();
-					this.showList=[
-						{
-							"ip": "192.168.8.7",
-							"machine_id":"1",
-							"cpu": {
-								"core_num": 16,
-								"usage": 85.41875
-							},
-							"finished": 2,
-							"ram": {
-								"total": 31.068809509277344,
-								"usage": 74.1
-							},
-							"running": 4,
-							"status": 1,
-							"tmp": {
-								"total": 730,
-								"usage": 2.0054205479452056
-							}
-						}
-					]
-					this.alert_count = 10
-					this.running_count = 2
-					this.finished_count = 4
-					this.online_count = 1
-					// this.showList = res.data.showList;
-					// this.alert_count: = res.data.summary.alert
-					// this.running_count: = res.data.summary.ongoing
-					// this.finished_count: = res.data.summary.finished
-					// this.online_count: = res.data.summary.online
+					this.showList = res.data.data.machine_list;
+					this.alert_count = res.data.data.summary.alert
+					this.running_count = res.data.data.summary.ongoing
+					this.finished_count = res.data.data.summary.finished
+					this.online_count = res.data.data.summary.online
 				});
 			this.interT = setInterval(() => {
 				this.$Loading.start();
-				// this.$axios.get(`${this.$config.KEY.url}/machine/user/1`)
-				this.$axios.get('/showList')
+				this.$axios.get(`${this.$config.KEY.url}/machine/user/1`)
+				// this.$axios.get('/showList')
 					.then(res => {
 						this.$Loading.finish();
-						this.showList=[
-							{
-								"ip": "192.168.8.7",
-								"machine_id":"1",
-								"cpu": {
-									"core_num": 16,
-									"usage": 85.41875
-								},
-								"finished": 2,
-								"ram": {
-									"total": 31.068809509277344,
-									"usage": 74.1
-								},
-								"running": 4,
-								"status": 1,
-								"tmp": {
-									"total": 730,
-									"usage": 2.0054205479452056
-								}
-							}
-						]
-						this.alert_count = 10
-						this.running_count = 2
-						this.finished_count = 4
-						this.online_count = 1
-						// this.showList = res.data.showList;
-						// this.alert_count: = res.data.summary.alert
-						// this.running_count: = res.data.summary.ongoing
-						// this.finished_count: = res.data.summary.finished
-						// this.online_count: = res.data.summary.online
+
+						this.showList = res.data.data.machine_list;
+						this.alert_count = res.data.data.summary.alert
+						this.running_count = res.data.data.summary.ongoing
+						this.finished_count = res.data.data.summary.finished
+						this.online_count = res.data.data.summary.online
 					});
 				},30*1000)
 		},
